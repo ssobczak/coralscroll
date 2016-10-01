@@ -1,0 +1,44 @@
+.paralax-text {
+    display: table;
+    width: 100vw;
+    height: 100vh;
+    margin-bottom: 95vh;
+    position: relative;
+    z-index: 3;
+    background-color: #fff;
+    align-items: center;
+}
+
+.paralax-text.paralax-last {
+    margin-bottom: 0px;
+}
+
+.paralax-cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 20px;
+}
+
+.paralax-container {
+    display: table;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.paralax-img-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.paralax-container.active {
+    z-index: 2;
+}
+
+.paralax-container img {
+    width: 100%;
+}
