@@ -14,6 +14,6 @@
         wp_enqueue_style('coralscroll-css',  $this->plugin_url . '/resources/css.css');
     }
 
-    add_action( 'wp_footer', 'coralscroll');
+    add_action( 'wp_head', 'coralscroll');
 
 ?>
