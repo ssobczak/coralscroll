@@ -3,7 +3,7 @@
  * Plugin Name: CoralScroll
  * Plugin URI: https://github.com/ssobczak/coralscroll
  * Description: This plugin adds paralax scrolling efects to images.
- * Version: 0.2:.0
+ * Version: 0.3.0
  * Author: Szymon Sobczak
  * Author URI: http://coralnotes.com
  * License: MIT
