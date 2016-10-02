@@ -1,4 +1,7 @@
 $(function(){
+    // cleanup old layout tags
+    $('.main-body').removeClass('col-md-6').removeClass('col-md-offset-3').addClass('container')
+
     // cleanup after Wordpress
     $('.paralax').removeAttr('width');
     $('.paralax').removeAttr('height');
@@ -16,19 +19,19 @@ $(function(){
 
     // repack non-image content into divs
     $('.paralax-container').each(function () {
-        var text_div =  $("<div class='paralax-cell'></div>");
+        var text_div =  $("<div class='paralax-cell col-md-6 col-md-offset-3'></div>");
 
         $(this).prevAll(":not(.paralax-div)").each(function () {
             text_div.prepend($(this));
         });
 
-        $("<div class='paralax-div paralax-text'></div>").append(text_div).insertBefore($(this));
+        $("<div class='paralax-div paralax-text row'></div>").append(text_div).insertBefore($(this));
     });
 
     // repack bottom non-image content into div:last
-    var text_div =  $("<div class='paralax-cell'></div>");
+    var text_div =  $("<div class='paralax-cell col-md-6 col-md-offset-3'></div>");
     text_div.append($('.paralax-container').last().nextAll());
-    $("<div class='paralax-div paralax-text paralax-last'></div>").append(text_div).insertAfter($('.paralax-container').last());
+    $("<div class='paralax-div paralax-text row paralax-last'></div>").append(text_div).insertAfter($('.paralax-container').last());
 
     // add hook on scrolling
     var texts = $('.paralax-text');
@@ -40,7 +43,7 @@ $(function(){
         texts.each(function(){
             var text = $(this);
 
-            if(y >= text.offset().top) {
+            if(y >= text.offset().top-100) {
                 text.next().addClass('active');
             } else {
                 text.next().removeClass('active');

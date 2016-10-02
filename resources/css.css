@@ -1,7 +1,13 @@
+.main-body {
+    width: 100vw;
+    margin: 0px;
+}
+
 .paralax-text {
     display: table;
     width: 100vw;
-    height: 100vh;
+    min-height: 80vh;
+    margin: 0px;
     margin-bottom: 95vh;
     position: relative;
     z-index: 3;
@@ -17,6 +23,7 @@
     display: table-cell;
     vertical-align: middle;
     padding: 20px;
+    float: none;
 }
 
 .paralax-container {
