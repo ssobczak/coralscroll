@@ -1,4 +1,4 @@
-function coralscroll() {
+function coralscroll($) {
     if ($('.paralax').length > 0) {
         // cleanup after Wordpress
         $('.paralax').removeAttr('width');
@@ -12,26 +12,43 @@ function coralscroll() {
             $('.main-body').addClass('container').addClass('paralax-main-body');
 
 
+            $('.paralax').parent().each(function () {
+                var child_nodes = Array.prototype.slice.call(this.childNodes);
+
+                var paralax_pos = child_nodes.findIndex(function(node) {
+                    return $(node).hasClass('paralax');
+                });
+
+
+                $(this).before($('<p></p>').append(child_nodes.slice(0, paralax_pos)));
+                $(this).after($('<p></p>').append($(child_nodes).slice(paralax_pos+1)));
+            });
+
+
             // repack images into container divs
             $('.paralax').parent().replaceWith(function () {
+                var res = $("<div class='paralax-div paralax-container'></div>");
+
                 var container = $("<div class='paralax-img-cell'></div>");
                 container.append($(this).children());
-                return $("<div class='paralax-div paralax-container'></div>").append(container);
+                return res.append(container);
             });
+
 
             // activate first image
             $('.paralax-container').first().addClass('active');
 
-
             // repack non-image content into divs
             $('.paralax-container').each(function () {
-                var text_div = $("<div class='paralax-cell col-md-6 col-md-offset-3'></div>");
+                if ($(this).prevAll().length > 0) {
+                    var text_div = $("<div class='paralax-cell col-md-6 col-md-offset-3'></div>");
 
-                $(this).prevAll(":not(.paralax-div)").each(function () {
-                    text_div.prepend($(this));
-                });
+                    $(this).prevAll(":not(.paralax-div)").each(function () {
+                        text_div.prepend($(this));
+                    });
 
-                $("<div class='paralax-div paralax-text row'></div>").append(text_div).insertBefore($(this));
+                    $("<div class='paralax-div paralax-text row'></div>").append(text_div).insertBefore($(this));
+                }
             });
 
             if ($('.paralax-container').last().nextAll().length > 0) {
@@ -39,6 +56,10 @@ function coralscroll() {
                 var text_div = $("<div class='paralax-cell col-md-6 col-md-offset-3'></div>");
                 text_div.append($('.paralax-container').last().nextAll());
                 $("<div class='paralax-div paralax-text row paralax-last'></div>").append(text_div).insertAfter($('.paralax-container').last());
+            }
+
+            if ($('.paralax-container').first().prevAll().length == 0) {
+                $('.paralax-text').first().attr('style', 'margin-top: 60vh;')
             }
 
             // add hook on scrolling
@@ -62,15 +83,15 @@ function coralscroll() {
     }
 }
 
-$(function () {
-    coralscroll();
+(function($){
+    coralscroll($);
 
     $(window).on("orientationchange", function(){
         if ($('.paralax').length > 0)
             if (window.orientation == 0) {
                 location.reload();
             } else {
-                coralscroll();
+                coralscroll($);
             }
     });
-});
+})(jQuery);
