@@ -12,6 +12,7 @@ function coralscroll($) {
             $('.main-body').addClass('container').addClass('paralax-main-body');
 
 
+            // handle items in the same paragraph as the image
             $('.paralax').parent().each(function () {
                 var child_nodes = Array.prototype.slice.call(this.childNodes);
 
@@ -51,8 +52,8 @@ function coralscroll($) {
                 }
             });
 
+            // repack bottom non-image content into div:last
             if ($('.paralax-container').last().nextAll().length > 0) {
-                // repack bottom non-image content into div:last
                 var text_div = $("<div class='paralax-cell col-md-6 col-md-offset-3'></div>");
                 text_div.append($('.paralax-container').last().nextAll());
                 $("<div class='paralax-div paralax-text row paralax-last'></div>").append(text_div).insertAfter($('.paralax-container').last());
@@ -60,6 +61,8 @@ function coralscroll($) {
 
             if ($('.paralax-container').first().prevAll().length == 0) {
                 $('.paralax-text').first().attr('style', 'margin-top: 60vh;')
+            } else {
+                $('.paralax-text').first().attr('style', 'min-height: 65vh');
             }
 
             // add hook on scrolling
@@ -72,10 +75,12 @@ function coralscroll($) {
                 texts.each(function () {
                     var text = $(this);
 
-                    if (y >= text.offset().top - 50) {
-                        text.next().addClass('active');
-                    } else {
-                        text.next().removeClass('active');
+                    if (y > 0) {
+                        if (y >= text.offset().top - 60) {
+                            text.next().addClass('active');
+                        } else {
+                            text.next().removeClass('active');
+                        }
                     }
                 });
             });
