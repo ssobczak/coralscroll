@@ -1,7 +1,7 @@
 .paralax-main-body {
     width: 100vw;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .paralax-text {
@@ -10,7 +10,7 @@
     padding-left: 5%;
     padding-right: 12%;
     min-height: 95vh;
-    margin: 0px;
+    margin: 0;
     margin-bottom: 95vh;
     position: relative;
     z-index: 3;
@@ -20,7 +20,8 @@
 }
 
 .paralax-text.paralax-last {
-    margin-bottom: 0px;
+    margin-bottom: 0;
+    min-height: 50vh;
 }
 
 .paralax-cell {
@@ -57,5 +58,5 @@
 .paralax-disabled-img {
     width: 100%;
     height: auto;
-    margin: 80px 0px;
+    margin: 80px 0;
 }
